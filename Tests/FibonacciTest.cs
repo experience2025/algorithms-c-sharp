@@ -16,8 +16,8 @@ public class FibonacciTest
     public void TestNegative()
     {
         Assert.Throws<ArgumentException>(() => Program.FibonacciRec(-1));
-        Assert.Throws<ArgumentException>(() => Program.FibonacciIter(0));
-        Assert.Throws<ArgumentException>(() => Program.Fibonacci(0));
+        Assert.Throws<ArgumentException>(() => Program.FibonacciIter(-1));
+        Assert.Throws<ArgumentException>(() => Program.Fibonacci(-1));
     }
     
     [Fact]
