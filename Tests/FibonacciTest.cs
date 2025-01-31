@@ -8,12 +8,16 @@ public class FibonacciTest
     public void TestZero()
     {
         Assert.Throws<ArgumentException>(() => Program.FibonacciRec(0));
+        Assert.Throws<ArgumentException>(() => Program.FibonacciIter(0));
+        Assert.Throws<ArgumentException>(() => Program.Fibonacci(0));
     }
 
     [Fact]
     public void TestNegative()
     {
         Assert.Throws<ArgumentException>(() => Program.FibonacciRec(-1));
+        Assert.Throws<ArgumentException>(() => Program.FibonacciIter(0));
+        Assert.Throws<ArgumentException>(() => Program.Fibonacci(0));
     }
     
     [Fact]
@@ -26,6 +30,8 @@ public class FibonacciTest
         for (var number = 1; number < numbers.Length + 1; number++)
         {
             Assert.Equal(numbers[number - 1], Program.FibonacciRec(number));
+            Assert.Equal(numbers[number - 1], Program.FibonacciIter(number));
+            Assert.Equal(numbers[number - 1], Program.Fibonacci(number));
         }
     }
 }
