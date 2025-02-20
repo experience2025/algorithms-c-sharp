@@ -4,77 +4,84 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("Числа Фибоначчи:");
-            for (var number = 1; number < 10; number++)
+        int[,] example = new int[4, 4]
+        {
+            { 12, 5, 6, 1}, { 7, 8, 9, 4 }, { 11, -1, 2, 5 }, { 20, 3, 6, 9 }
+        };
+
+    calculateDeterminant(example);
+    }
+
+    public static int calculateDeterminant(int[,] matrix)
+    {
+        if (matrix.GetLength(0) != matrix.GetLength(1))
+        {
+            throw new ArgumentException("Матрица не квадратная");
+        }
+
+        if (matrix.GetUpperBound(0) + 1 == 1)
+        {
+            return matrix[0,0];
+        }
+
+        bool flag = false;
+
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < matrix.GetLength(0); j++)
             {
-                Console.WriteLine($"{number}: {FibonacciRec(number)}");
-                Console.WriteLine($"{number}: {FibonacciIter(number)}");
-                Console.WriteLine($"{number}: {Fibonacci(number)}");
+                if (matrix[i, j] != 0) flag = true;
             }
-    }
-
-    public static int FibonacciRec(int n)
-    {
-        if (n < 1)
-        {
-            throw new ArgumentException("Номер числа Фибоначчи должен быть положительным числом", nameof(n));
-        }
-        if (n <= 2)
-        {
-            return 1;
         }
 
-        return FibonacciRec(n - 1) + FibonacciRec(n - 2);
+        if(flag == false)
+        {
+            throw new ArgumentException("Матрица вырожденная");
+        }
+
+        if (matrix.GetUpperBound(0) + 1 == 2)
+        {
+            int determinant = (matrix[0, 0] * matrix[1, 1]) - (matrix[1, 0] * matrix[0, 1]);
+            return determinant;
+        }
+
+        else
+        {
+
+            int cumulative = 0;
+
+            for(int i = 0; i < matrix.GetLength(1); i++)
+            {
+                int[,] minor = new int[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
+
+                for(int j = 1; j < matrix.GetLength(0); j++)
+                {
+                    int y = 0;
+
+                    for (int k = 0; k < matrix.GetLength(1); k++)
+                    {
+
+                        if (k == i)
+                        {
+                            continue;
+                        }
+
+                        minor[j - 1, y] = matrix[j, k];
+
+                        y++;
+                    
+                    }
+
+                }
+
+                cumulative += (int)Math.Pow(-1, 1 + i + 1) * matrix[0, i] * calculateDeterminant(minor);
+                Console.WriteLine(cumulative);
+
+            }
+
+            return cumulative;
+        }
+
     }
 
-     public static int FibonacciIter(int n)
-    {
-     if (n < 1)
-     {
-         throw new ArgumentException("Номер числа Фибоначчи должен быть положительным числом", nameof(n));
-     }
-
-     if (n <= 2)
-     {
-         return 1;
-     }
-
-     int[] fibonacci_numbers = new int[n + 1];
-     fibonacci_numbers[0] = 0;
-     fibonacci_numbers[1] = 1;
-
-     for (int i = 2; i <= n; i++)
-     {
-         fibonacci_numbers[i] = fibonacci_numbers[i - 2] + fibonacci_numbers[i - 1];
-     }
-
-     return fibonacci_numbers[n];
-    }
-
-     public static int Fibonacci(int n)
-    {
-     if (n < 1)
-     {
-         throw new ArgumentException("Номер числа Фибоначчи должен быть положительным числом", nameof(n));
-     }
-
-     if (n <= 2)
-     {
-         return 1;
-     }
-
-     int first_number = 0;
-     int second_number = 1;
-     int sum = 0;
-
-     for (int i = 2; i <= n; i++)
-     {
-         sum = first_number + second_number;
-
-         first_number = second_number;
-         second_number = sum;
-     }
-
-     return sum;
-    }
 }
