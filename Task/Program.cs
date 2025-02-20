@@ -9,7 +9,7 @@ public class Program
             { 12, 5, 6, 1}, { 7, 8, 9, 4 }, { 11, -1, 2, 5 }, { 20, 3, 6, 9 }
         };
 
-    calculateDeterminant(example);
+        calculateDeterminant(example);
     }
 
     public static int calculateDeterminant(int[,] matrix)
@@ -75,7 +75,6 @@ public class Program
                 }
 
                 cumulative += (int)Math.Pow(-1, 1 + i + 1) * matrix[0, i] * calculateDeterminant(minor);
-                Console.WriteLine(cumulative);
 
             }
 
