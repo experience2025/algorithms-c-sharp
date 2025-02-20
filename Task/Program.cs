@@ -12,75 +12,69 @@ public class Program
         calculateDeterminant(example);
     }
 
-    public static int calculateDeterminant(int[,] matrix)
+public static long calculateDeterminant(int[,] matrix)
+{
+    if (matrix.GetLength(0) != matrix.GetLength(1))
     {
-        if (matrix.GetLength(0) != matrix.GetLength(1))
+        throw new ArgumentException("Матрица не квадратная");
+    }
+
+    bool flag = false;
+
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(0); j++)
         {
-            throw new ArgumentException("Матрица не квадратная");
+            if (matrix[i, j] != 0 || matrix.GetUpperBound(0) + 1 == 1) flag = true;
         }
+    }
 
-        if (matrix.GetUpperBound(0) + 1 == 1)
+    if(flag == false)
+    {
+        throw new ArgumentException("Матрица вырожденная");
+    }
+
+    if (matrix.GetUpperBound(0) + 1 == 1)
+    {
+        return (long)matrix[0, 0];
+    }
+
+    else
+    {
+
+        long cumulative = 0;
+
+        for(int i = 0; i < matrix.GetLength(1); i++)
         {
-            return matrix[0,0];
-        }
+            int[,] minor = new int[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
 
-        bool flag = false;
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(0); j++)
+            for(int j = 1; j < matrix.GetLength(0); j++)
             {
-                if (matrix[i, j] != 0) flag = true;
-            }
-        }
+                int y = 0;
 
-        if(flag == false)
-        {
-            throw new ArgumentException("Матрица вырожденная");
-        }
-
-        if (matrix.GetUpperBound(0) + 1 == 2)
-        {
-            int determinant = (matrix[0, 0] * matrix[1, 1]) - (matrix[1, 0] * matrix[0, 1]);
-            return determinant;
-        }
-
-        else
-        {
-
-            int cumulative = 0;
-
-            for(int i = 0; i < matrix.GetLength(1); i++)
-            {
-                int[,] minor = new int[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
-
-                for(int j = 1; j < matrix.GetLength(0); j++)
+                for (int k = 0; k < matrix.GetLength(1); k++)
                 {
-                    int y = 0;
 
-                    for (int k = 0; k < matrix.GetLength(1); k++)
+                    if (k == i)
                     {
-
-                        if (k == i)
-                        {
-                            continue;
-                        }
-
-                        minor[j - 1, y] = matrix[j, k];
-
-                        y++;
-                    
+                        continue;
                     }
 
-                }
+                    minor[j - 1, y] = matrix[j, k];
 
-                cumulative += (int)Math.Pow(-1, 1 + i + 1) * matrix[0, i] * calculateDeterminant(minor);
+                    y++;
+                 
+                }
 
             }
 
-            return cumulative;
+            cumulative += (long)Math.Pow(-1, 1 + i + 1) * matrix[0, i] * calculateDeterminant(minor);
+
         }
 
+        return cumulative;
     }
+
+}
 
 }
