@@ -22,11 +22,11 @@ public class Test
     [Fact]
     public void TestSecondOrder()
     {
-       int [,] testMatrix = new int[2,2];
-       testMatrix[0,0] = 1;
-       testMatrix[0,1] = 2;
-       testMatrix[1,0] = 3;
-       testMatrix[0,1] = 4;
+       int [,] testMatrix =
+      {
+          { 1,2 }, {3,4 }
+      };
+      
        Assert.Equal(-2, Program.calculateDeterminant(testMatrix));
     }
 
