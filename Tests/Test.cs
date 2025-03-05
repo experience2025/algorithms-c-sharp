@@ -10,7 +10,7 @@ public class Test
        float [,] testMatrix = new float[1,1];
        testMatrix[0,0] = 1;
 
-       List<string> path = new List<string>() {0, 0};
+       List<string> path = new List<string>() {"0", "0"};
        Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
        result.Add(1, path);
         
