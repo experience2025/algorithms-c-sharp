@@ -18,7 +18,7 @@ public class Test
     }
 
     [Fact]
-    public void TestDouble()
+    public void Test()
     {
        int [,] testMatrix =
       {
