@@ -26,7 +26,7 @@ public class Program
             pathString += index + " | ";
             }
     
-        Console.WriteLine($"Длина пути: {pair.Key}  Путь: {pathString}");
+        //Console.WriteLine($"Длина пути: {pair.Key}  Путь: {pathString}");
         }
     }
 
