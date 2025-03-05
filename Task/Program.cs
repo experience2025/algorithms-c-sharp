@@ -30,7 +30,7 @@ public class Program
         }
     }
 
-static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
+public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
 {
     List<string> path = new List<string>();
     float[,] coeffMatrix = (float[,])matrix.Clone();
