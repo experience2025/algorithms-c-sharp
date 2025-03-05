@@ -5,26 +5,24 @@ namespace Tests;
 public class Test
 {
     [Fact]
-    public void TestEmptyMatrix()
+    public void TestSingle()
     {
-       int [,] testMatrix = new int[2,2];
-       Assert.Throws<ArgumentException>(() => Program.calculateDeterminant(testMatrix));
-    }
-
-    [Fact]
-    public void TestFirstOrder()
-    {
-       int [,] testMatrix = new int[1,1];
+       float [,] testMatrix = new float[1,1];
        testMatrix[0,0] = 1;
-       Assert.Equal(1, Program.calculateDeterminant(testMatrix));
+
+       List<string> path = new List<string>() {0, 0};
+       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+       result.Add(1, path);
+        
+       Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
 
     [Fact]
-    public void TestSecondOrder()
+    public void TestDouble()
     {
        int [,] testMatrix =
       {
-          { 1,2 }, {3,4 }
+          { 1.1,2}, {3,4}
       };
       
        Assert.Equal(-2, Program.calculateDeterminant(testMatrix));
@@ -40,7 +38,7 @@ public class Test
     }
 
     [Fact]
-    public void TestThirdOrder()
+    public void TestDouble()
     {
        int [,] testMatrix = new int[3,3];
 
@@ -54,7 +52,7 @@ public class Test
        testMatrix[2,1] = -8;
        testMatrix[2,2] = 9;
 
-       Assert.Equal(0, Program.calculateDeterminant(testMatrix));
+       Assert.Throws<ArgumentException>(() => Program.calculateDeterminant(testMatrix));
 
     }
     [Fact]
