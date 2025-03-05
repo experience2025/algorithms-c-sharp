@@ -18,74 +18,128 @@ public class Test
     }
 
     [Fact]
-    public void TestNotSquareRectangle()
-    {
-       int [,] testMatrix = new int[1,2];
-       testMatrix[0,0] = 1;
-       testMatrix[0,1] = 2;
-       Assert.Throws<ArgumentException>(() => Program.calculateDeterminant(testMatrix));
-    }
-
-    [Fact]
     public void TestDouble()
     {
-       int [,] testMatrix = new int[3,3];
+       float [,] testMatrix = new float[2,2] {{1.1,2}, {3,4}};
 
-       testMatrix[0,0] = 1;
-       testMatrix[0,1] = -2;
-       testMatrix[0,2] = 3;
-       testMatrix[1,0] = -4;
-       testMatrix[1,1] = 5;
-       testMatrix[1,2] = -6;
-       testMatrix[2,0] = 7;
-       testMatrix[2,1] = -8;
-       testMatrix[2,2] = 9;
-
-       Assert.Throws<ArgumentException>(() => Program.calculateDeterminant(testMatrix));
+       List<string> path = new List<string>() {"0, 0", "0, 1", "1, 1"};
+       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+       result.Add(7.1, path);
+        
+       Assert.Equal(result, Program.CalculatePath(testMatrix));
 
     }
     [Fact]
-    public void TestFourthOrder()
+    public void TestNegative()
     {
-       int [,] testMatrix = new int[4,4];
-
-       testMatrix[0,0] = 3;
-       testMatrix[0,1] = -3;
-       testMatrix[0,2] = -5;
-       testMatrix[0,3] = 8;
-       testMatrix[1,0] = -3;
-       testMatrix[1,1] = 2;
-       testMatrix[1,2] = 4;
-       testMatrix[1,3] = -6;
-       testMatrix[2,0] = 2;
-       testMatrix[2,1] = -5;
-       testMatrix[2,2] = -7;
-       testMatrix[2,3] = 5;
-       testMatrix[3,0] = -4;
-       testMatrix[3,1] = 3;
-       testMatrix[3,2] = 5;
-       testMatrix[3,3] = -6;
-
-       Assert.Equal(18, Program.calculateDeterminant(testMatrix));
+       float [,] testMatrix = new float[2,2] {{1.1,2}, {-3,4}};
+        
+       List<string> path = new List<string>() {"0, 0", "1, 0", "1, 1"};
+       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+       result.Add(2.1, path);
+        
+       Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
 
     [Fact]
-    public void TestLarge()
+    public void TestTriple()
     {
-       int [,] testMatrix = 
+       float [,] testMatrix = new float[3,3] {{1,2,2}, {3,4,2}, {1,1,2}};
+        
+       List<string> path = new List<string>() {"0, 0", "1, 0", "2, 0", "2, 1", "2, 2"};
+       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+       result.Add(8, path);
+        
+       Assert.Equal(result, Program.CalculatePath(testMatrix));
+    }
+
+    [Fact]
+    public void TestRectangle()
+    {
+       float [,] testMatrix = new float[2,3] {{1,2,2}, {3,4,1}};
+        
+       List<string> path = new List<string>() {"0, 0", "0, 1", "0, 2", "1, 2"};
+       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+       result.Add(6, path);
+        
+       Assert.Equal(result, Program.CalculatePath(testMatrix));
+    }
+
+    [Fact]
+    public void TestSquare()
+    {
+       float [,] testMatrix = new float[6,6] 
        {
-            {3, 7, -5, 1, 19, 5, 0, -2, 4, 10},
-            {-2, 2, 4, -6, 1, 0, 3, 5, 7, 1},
-            {5, -5, -7, 5, 8, 9, -1, 0, 2, 2},
-            {-4, 3, 5, -6, 17, -1, 9, 0, 2, 3},
-            {3, -3, -5, 8, -9, -1, 0, 2, 4, 7},
-            {-3, 2, 4, -6, 1, 0, 3, 5, 7, 11},
-            {2, -5, -7, 7, 8, 9, -1, 0, -2, 5},
-            {-4, 3, 15, -6, 7, -1, 9, 1, 2, 13},
-            {3, -3, -5, 8, 9, -1, 0, 2, 4, 17},
-            {-13, 2, 4, -6, 1, 0, -3, 5, 7, 1},
+            {1, 2, 2, 1, 3, 4},
+            {3, 1, 1, 5, 7, 6},
+            {3, 4, 1, 2, 7, 6},
+            {5, 7, 1, 6, 4, 4},
+            {5, 9, 2, 3, 5, 8},
+            {2, 2, 1, 3, 1, 6},
        };
+        
+       List<string> path = new List<string>() 
+       {
+            "0, 0",
+            "0, 1",
+            "1, 1",
+            "1, 2",
+            "2, 2",
+            "3, 2",
+            "4, 2",
+            "5, 2",
+            "5, 3",
+            "5, 4",
+            "5, 5"
+       };
+       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+       result.Add(20, path);
+        
+       Assert.Equal(result, Program.CalculatePath(testMatrix));
+    }
 
-       Assert.Equal(4204289520, (ulong)Program.calculateDeterminant(testMatrix));
+    [Fact]
+    public void TestRectangleLarge()
+    {
+       float [,] testMatrix = new float[12,6] 
+       {
+           {8, 9, 2, 1, 6, 9},
+           {2, 3, 4, 8, 5, 1},
+           {4, 1, 7, 7, 1, 7},
+           {5, 6, 2, 8, 5, 6},
+           {3, 5, 2, 5, 8, 3},
+           {6, 9, 1, 3, 1, 5},
+           {7, 5, 4, 4, 2, 9},
+           {8, 7, 4, 1, 3, 5},
+           {6, 5, 7, 7, 6, 2},
+           {6, 2, 4, 8, 6, 3},
+           {7, 7, 2, 4, 5, 7},
+           {3, 8, 1, 6, 7, 1},
+       };
+        
+       List<string> path = new List<string>() 
+       {
+                    "0, 0",
+                    "1, 0",
+                    "1, 1",
+                    "2, 1",
+                    "3, 1",
+                    "3, 2",
+                    "4, 2",
+                    "5, 2",
+                    "5, 3",
+                    "5, 4",
+                    "6, 4",
+                    "7, 4",
+                    "7, 5",
+                    "8, 5",
+                    "9, 5",
+                    "10, 5",
+                    "11, 5"
+       };
+       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+       result.Add(52, path);
+        
+       Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
 }
