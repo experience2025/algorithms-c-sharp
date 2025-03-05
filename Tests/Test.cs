@@ -20,11 +20,11 @@ public class Test
     [Fact]
     public void TestDouble()
     {
-       float [,] testMatrix = new float[2,2] {{1.1,2}, {3,4}};
+       float [,] testMatrix = new float[2,2] {{1.1f,2}, {3,4}};
 
        List<string> path = new List<string>() {"0, 0", "0, 1", "1, 1"};
        Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
-       result.Add(7.1, path);
+       result.Add(7.1f, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
 
@@ -32,11 +32,11 @@ public class Test
     [Fact]
     public void TestNegative()
     {
-       float [,] testMatrix = new float[2,2] {{1.1,2}, {-3,4}};
+       float [,] testMatrix = new float[2,2] {{1.1f,2}, {-3,4}};
         
        List<string> path = new List<string>() {"0, 0", "1, 0", "1, 1"};
        Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
-       result.Add(2.1, path);
+       result.Add(2.1f, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
