@@ -133,6 +133,7 @@ static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
     }
 
     float pathLength = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
+    path.Reverse();
     result.Add(pathLength, path);
 
     return result;
