@@ -41,7 +41,7 @@ public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
         coeffMatrix[i, 0] = matrix[i, 0] + cumulative;
-        path.Add(string.Format("{0}, 0 ", i));
+        path.Add(string.Format("{0}, 0", i));
         cumulative = matrix[i, 0] + cumulative;
     }
 
@@ -61,7 +61,7 @@ public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
     for (int i = 0; i < matrix.GetLength(1); i++)
     {
         coeffMatrix[0, i] = matrix[0, i] + cumulative;
-        path.Add(string.Format("0, {0} ", i));
+        path.Add(string.Format("0, {0}", i));
         cumulative = matrix[0, i] + cumulative;
     }
 
@@ -108,26 +108,26 @@ public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
     {
         if(rowPosition == 0)
         {
-            path.Add ($" {rowPosition}, {columnPosition}");
+            path.Add ($"{rowPosition}, {columnPosition}");
             columnPosition--;
             continue;
         }
 
         if (columnPosition == 0)
         {
-            path.Add($" {rowPosition}, {columnPosition}");
+            path.Add($"{rowPosition}, {columnPosition}");
             rowPosition--;
             continue;
         }
 
         if (coeffMatrix[rowPosition,columnPosition - 1] < coeffMatrix[rowPosition - 1, columnPosition])
         {
-            path.Add($" {rowPosition}, {columnPosition}");
+            path.Add($"{rowPosition}, {columnPosition}");
             columnPosition--;
         }
         else
         {
-            path.Add($" {rowPosition}, {columnPosition}");
+            path.Add($"{rowPosition}, {columnPosition}");
             rowPosition--;
         }
     }
