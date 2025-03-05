@@ -28,6 +28,7 @@ public class Program
     
         Console.WriteLine($"Длина пути: {pair.Key}  Путь: {pathString}");
         }
+    }
 
 static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
 {
@@ -136,4 +137,5 @@ static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
 
     return result;
 
+}
 }
