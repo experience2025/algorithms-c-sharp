@@ -4,7 +4,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        int[,] matrix = new int[6, 6] 
+        float[,] matrix = new float[6, 6] 
         {
             { 1, 2, 2, 1, 3, 4 },
             { 3, 1, 1, 5, 7, 6 },
@@ -13,30 +13,29 @@ public class Program
             { 5, 9, 2, 3, 5, 8 },
             { 2, 2, 1, 3, 1, 6 },
         };
-        
-        Dictionary<int, List<string> > result = new Dictionary<int, List<string> >();
+
+        Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
         result = CalculatePath(matrix);
-        
+
         string pathString = "";
-        
+
         foreach (var pair in result)
         {
             foreach (var index in pair.Value)
             {
-                pathString += index + " | ";
+            pathString += index + " | ";
             }
-        
-            Console.WriteLine($"Длина пути: {pair.Key}  Путь: {pathString}");
+    
+        Console.WriteLine($"Длина пути: {pair.Key}  Путь: {pathString}");
         }
-    }
 
-static Dictionary< int, List<string> > CalculatePath(int[,] matrix)
+static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
 {
     List<string> path = new List<string>();
-    int[,] coeffMatrix = (int[,])matrix.Clone();
-    Dictionary<int, List<string> > result = new Dictionary<int, List<string> >();
+    float[,] coeffMatrix = (float[,])matrix.Clone();
+    Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
 
-    int cumulative = 0;
+    float cumulative = 0f;
 
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
@@ -47,7 +46,7 @@ static Dictionary< int, List<string> > CalculatePath(int[,] matrix)
 
     if (matrix.GetLength(1) == 1)
     {
-        int pathLength1 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
+        float pathLength1 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
         result.Add(pathLength1, path);
         return result;
     }
@@ -67,7 +66,7 @@ static Dictionary< int, List<string> > CalculatePath(int[,] matrix)
 
     if (matrix.GetLength(0) == 1)
     {
-        int pathLength2 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
+        float pathLength2 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
         result.Add(pathLength2, path);
         return result;
     }
@@ -132,7 +131,7 @@ static Dictionary< int, List<string> > CalculatePath(int[,] matrix)
         }
     }
 
-    int pathLength = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
+    float pathLength = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
     result.Add(pathLength, path);
 
     return result;
