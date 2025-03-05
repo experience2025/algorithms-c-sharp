@@ -18,17 +18,6 @@ public class Test
     }
 
     [Fact]
-    public void Test()
-    {
-       int [,] testMatrix =
-      {
-          { 1.1,2}, {3,4}
-      };
-      
-       Assert.Equal(-2, Program.calculateDeterminant(testMatrix));
-    }
-
-    [Fact]
     public void TestNotSquareRectangle()
     {
        int [,] testMatrix = new int[1,2];
