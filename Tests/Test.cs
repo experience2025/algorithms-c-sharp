@@ -14,7 +14,7 @@ public class Test
        List<int[]> path = new List<int[]>() {indexes};
        Task.LengthPathObject result = new Task.LengthPathObject(1, path);
         
-       Assert.Equal(result, Program.CalculatePath(testMatrix));
+       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
     }
 
     [Fact]
