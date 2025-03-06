@@ -14,19 +14,15 @@ public class Program
             { 2, 2, 1, 3, 1, 6 },
         };
 
-        Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+        LengthPathObject result = new LengthPathObject();
         result = CalculatePath(matrix);
 
         string pathString = "";
-
-        foreach (var pair in result)
+        Console.WriteLine("Длина пути: {0}", result.Length);
+        
+        foreach (var indexes in result.Path)
         {
-            foreach (var index in pair.Value)
-            {
-            pathString += index + " | ";
-            }
-    
-        //Console.WriteLine($"Длина пути: {pair.Key}  Путь: {pathString}");
+          Console.WriteLine($"{indexes[0]}, {indexes[1]}");
         }
     }
 
