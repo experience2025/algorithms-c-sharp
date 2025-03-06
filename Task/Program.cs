@@ -137,6 +137,8 @@ public static LengthPathObject CalculatePath(float[,] matrix)
 
 }
 
+}
+
 public class LengthPathObject
 {
     public float Length;
@@ -153,6 +155,6 @@ public class LengthPathObject
       Length = 0;
       Path = new List<int[]>();
     }
-}
+
     
 }
