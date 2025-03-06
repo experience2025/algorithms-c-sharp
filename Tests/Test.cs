@@ -32,10 +32,9 @@ public class Test
     public void TestNegative()
     {
        float [,] testMatrix = new float[2,2] {{1.1f,2}, {-3,4}};
-        
-       List<string> path = new List<string>() {"0, 0", "1, 0", "1, 1"};
-       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
-       result.Add(2.1f, path);
+
+       List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{1,0}}, {new int[2]{1,1}}};
+       Task.LengthPathObject result = new Task.LengthPathObject(2.1f, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
@@ -44,10 +43,9 @@ public class Test
     public void TestTriple()
     {
        float [,] testMatrix = new float[3,3] {{1,2,2}, {3,4,2}, {1,1,2}};
-        
-       List<string> path = new List<string>() {"0, 0", "1, 0", "2, 0", "2, 1", "2, 2"};
-       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
-       result.Add(8, path);
+
+       List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{1,0}}, {new int[2]{2,0}}, {new int[2]{2,1}, {new int[2]{2,2}}}};
+       Task.LengthPathObject result = new Task.LengthPathObject(8, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
@@ -56,10 +54,9 @@ public class Test
     public void TestRectangle()
     {
        float [,] testMatrix = new float[2,3] {{1,2,2}, {3,4,1}};
-        
-       List<string> path = new List<string>() {"0, 0", "0, 1", "0, 2", "1, 2"};
-       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
-       result.Add(6, path);
+
+       List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{0,1}}, {new int[2]{0,2}}, {new int[2]{1,2}}};
+       Task.LengthPathObject result = new Task.LengthPathObject(6, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
@@ -77,22 +74,21 @@ public class Test
             {2, 2, 1, 3, 1, 6},
        };
         
-       List<string> path = new List<string>() 
+       List<int[]> path = new List<int[]>() 
        {
-            "0, 0",
-            "0, 1",
-            "1, 1",
-            "1, 2",
-            "2, 2",
-            "3, 2",
-            "4, 2",
-            "5, 2",
-            "5, 3",
-            "5, 4",
-            "5, 5"
+            {new int[2]{0,0}},
+            {new int[2]{0,1}},
+            {new int[2]{1,1}},
+            {new int[2]{1,2}},
+            {new int[2]{2,2}},
+            {new int[2]{3,2}},
+            {new int[2]{4,2}},
+            {new int[2]{5,2}},
+            {new int[2]{5,3}},
+            {new int[2]{5,4}},
+            {new int[2]{5,5}},
        };
-       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
-       result.Add(20, path);
+       Task.LengthPathObject result = new Task.LengthPathObject(20, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
@@ -116,28 +112,27 @@ public class Test
            {3, 8, 1, 6, 7, 1},
        };
         
-       List<string> path = new List<string>() 
+       List<int[]> path = new List<int[]>() 
        {
-                    "0, 0",
-                    "1, 0",
-                    "1, 1",
-                    "2, 1",
-                    "3, 1",
-                    "3, 2",
-                    "4, 2",
-                    "5, 2",
-                    "5, 3",
-                    "5, 4",
-                    "6, 4",
-                    "7, 4",
-                    "7, 5",
-                    "8, 5",
-                    "9, 5",
-                    "10, 5",
-                    "11, 5"
+                    {new int[2]{0,0}},
+                    {new int[2]{1,0}},
+                    {new int[2]{1,1}},
+                    {new int[2]{2,1}},
+                    {new int[2]{3,1}},
+                    {new int[2]{3,2}},
+                    {new int[2]{4,2}},
+                    {new int[2]{5,2}},
+                    {new int[2]{5,3}},
+                    {new int[2]{5,4}},
+                    {new int[2]{6,4}},
+                    {new int[2]{7,4}},
+                    {new int[2]{7,5}},
+                    {new int[2]{8,5}},
+                    {new int[2]{9,5}},
+                    {new int[2]{10,5}},
+                    {new int[2]{11,5}},
        };
-       Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
-       result.Add(52, path);
+       Task.LengthPathObject result = new Task.LengthPathObject(52, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
     }
