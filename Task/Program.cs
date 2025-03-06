@@ -93,14 +93,6 @@ public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
         }
     }
 
-    for (int i = 0; i < coeffMatrix.GetLength(0); i++)
-    {
-        for (int j = 0; j < coeffMatrix.GetLength(1); j++)
-        {
-            Console.WriteLine(coeffMatrix[i, j]);
-        }
-    }
-
     int rowPosition = coeffMatrix.GetLength(0) - 1;
     int columnPosition = coeffMatrix.GetLength(1) - 1;
 
@@ -145,9 +137,10 @@ public class LengthPath
     public int Length;
     public List<int[]> Path;
 
-    public LengthPath()
+    public LengthPath(int length, List<int[]> path)
     {
-      Path = new List<int[]>();
+      Length = legth;
+      Path = path;
     }
 }
     
