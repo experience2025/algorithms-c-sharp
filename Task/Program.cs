@@ -30,30 +30,32 @@ public class Program
         }
     }
 
-public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
+public static LengthPathObject CalculatePath(float[,] matrix)
 {
-    List<string> path = new List<string>();
+    List<int[]> path = new List<int[]>();
     float[,] coeffMatrix = (float[,])matrix.Clone();
-    Dictionary<float, List<string> > result = new Dictionary<float, List<string> >();
+    LehgthPathObject result = new LengthPathObject();
 
     float cumulative = 0f;
 
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
         coeffMatrix[i, 0] = matrix[i, 0] + cumulative;
-        path.Add(string.Format("{0}, 0", i));
+        int[] indexes = new int[2] {i, 0};
+        path.Add(indexes);
         cumulative = matrix[i, 0] + cumulative;
     }
 
     if (matrix.GetLength(1) == 1)
     {
         float pathLength1 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
-        result.Add(pathLength1, path);
+        result.Path = path;
+        result.Length = pathLength1;
         return result;
     }
     else
     {
-        path = new List<string>();
+        path = new List<int[]>();
     }
 
     cumulative = 0;
@@ -61,19 +63,21 @@ public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
     for (int i = 0; i < matrix.GetLength(1); i++)
     {
         coeffMatrix[0, i] = matrix[0, i] + cumulative;
-        path.Add(string.Format("0, {0}", i));
+        int[] indexes = new int[2] {0, i};
+        path.Add(indexes);
         cumulative = matrix[0, i] + cumulative;
     }
 
     if (matrix.GetLength(0) == 1)
     {
         float pathLength2 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
-        result.Add(pathLength2, path);
+        result.Path = path;
+        result.Length = pathLength2;
         return result;
     }
     else
     {
-        path = new List<string>();
+        path = new List<int[]>();
     }
 
     for (int i = 1; i < coeffMatrix.GetLength(0); i++)
@@ -100,47 +104,58 @@ public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
     {
         if(rowPosition == 0)
         {
-            path.Add ($"{rowPosition}, {columnPosition}");
+            int[] indexes = new int[2] {rowPosition, columnPosition};
+            path.Add (indexes);
             columnPosition--;
             continue;
         }
 
         if (columnPosition == 0)
         {
-            path.Add($"{rowPosition}, {columnPosition}");
+            int[] indexes = new int[2] {rowPosition, columnPosition};
+            path.Add (indexes);
             rowPosition--;
             continue;
         }
 
         if (coeffMatrix[rowPosition,columnPosition - 1] < coeffMatrix[rowPosition - 1, columnPosition])
         {
-            path.Add($"{rowPosition}, {columnPosition}");
+            int[] indexes = new int[2] {rowPosition, columnPosition};
+            path.Add (indexes);
             columnPosition--;
         }
         else
         {
-            path.Add($"{rowPosition}, {columnPosition}");
+            int[] indexes = new int[2] {rowPosition, columnPosition};
+            path.Add (indexes);
             rowPosition--;
         }
     }
 
     float pathLength = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
     path.Reverse();
-    result.Add(pathLength, path);
+    result.Length = pathLength;
+    result.Path = path;
 
     return result;
 
 }
 
-public class LengthPath
+public class LengthPathObject
 {
     public int Length;
     public List<int[]> Path;
 
-    public LengthPath(int length, List<int[]> path)
+    public LengthPathObject(int length, List<int[]> path)
     {
       Length = length;
       Path = path;
+    }
+
+    public LengthPathObject()
+    {
+      Length = 0;
+      Path = new List<int[]>();
     }
 }
     
