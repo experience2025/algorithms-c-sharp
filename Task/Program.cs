@@ -30,7 +30,7 @@ public static LengthPathObject CalculatePath(float[,] matrix)
 {
     List<int[]> path = new List<int[]>();
     float[,] coeffMatrix = (float[,])matrix.Clone();
-    LehgthPathObject result = new LengthPathObject();
+    LengthPathObject result = new LengthPathObject();
 
     float cumulative = 0f;
 
