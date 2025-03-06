@@ -44,7 +44,7 @@ public class Test
     {
        float [,] testMatrix = new float[3,3] {{1,2,2}, {3,4,2}, {1,1,2}};
 
-       List<int[]> path = new List<int[]>() { {new int[2]{0,0}}, {new int[2]{1,0}}, {new int[2]{2,0}}, {new int[2]{2,1}}}, {new int[2]{2,2} };
+       List<int[]> path = new List<int[]>() { {new int[2]{0,0}}, {new int[2]{1,0}}, {new int[2]{2,0}}, {new int[2]{2,1}}, {new int[2]{2,2}} };
        Task.LengthPathObject result = new Task.LengthPathObject(8, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
