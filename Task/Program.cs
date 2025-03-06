@@ -139,7 +139,7 @@ public class LengthPath
 
     public LengthPath(int length, List<int[]> path)
     {
-      Length = legth;
+      Length = length;
       Path = path;
     }
 }
