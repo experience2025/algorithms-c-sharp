@@ -25,7 +25,7 @@ public class Test
        List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{0,1}}, {new int[2]{1,1}}};
        Task.LengthPathObject result = new Task.LengthPathObject(7.1f, path);
         
-       Assert.Equal(result, Program.CalculatePath(testMatrix));
+       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
 
     }
     [Fact]
@@ -36,7 +36,7 @@ public class Test
        List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{1,0}}, {new int[2]{1,1}}};
        Task.LengthPathObject result = new Task.LengthPathObject(2.1f, path);
         
-       Assert.Equal(result, Program.CalculatePath(testMatrix));
+       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class Test
        List<int[]> path = new List<int[]>() { {new int[2]{0,0}}, {new int[2]{1,0}}, {new int[2]{2,0}}, {new int[2]{2,1}}, {new int[2]{2,2}} };
        Task.LengthPathObject result = new Task.LengthPathObject(8, path);
         
-       Assert.Equal(result, Program.CalculatePath(testMatrix));
+       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class Test
        List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{0,1}}, {new int[2]{0,2}}, {new int[2]{1,2}}};
        Task.LengthPathObject result = new Task.LengthPathObject(6, path);
         
-       Assert.Equal(result, Program.CalculatePath(testMatrix));
+       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public class Test
        };
        Task.LengthPathObject result = new Task.LengthPathObject(20, path);
         
-       Assert.Equal(result, Program.CalculatePath(testMatrix));
+       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
     }
 
     [Fact]
@@ -134,6 +134,6 @@ public class Test
        };
        Task.LengthPathObject result = new Task.LengthPathObject(52, path);
         
-       Assert.Equal(result, Program.CalculatePath(testMatrix));
+       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
     }
 }
