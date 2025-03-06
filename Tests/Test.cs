@@ -22,7 +22,7 @@ public class Test
     {
        float [,] testMatrix = new float[2,2] {{1.1f,2}, {3,4}};
 
-       List<int[]> path = new List<int[]>() {{0, 0}, {0, 1}, {1, 1}};
+       List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{0,1}}, {new int[2]{1,1}}};
        Task.LengthPathObject result = new Task.LengthPathObject(7.1f, path);
         
        Assert.Equal(result, Program.CalculatePath(testMatrix));
