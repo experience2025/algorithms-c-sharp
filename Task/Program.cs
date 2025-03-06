@@ -139,4 +139,15 @@ public static Dictionary< float, List<string> > CalculatePath(float[,] matrix)
     return result;
 
 }
+
+public class LengthPath
+{
+    public int Length;
+    public List<int[]> Path;
+
+    public LengthPath()
+    {
+      Path = new List<int[]>();
+    }
+    
 }
