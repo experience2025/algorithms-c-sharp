@@ -64,4 +64,35 @@ public static int binomial_coefficient(int n, int k, bool rec = false)
 		  }
 		  
 	}
+
+static string[] Generate_strings(int Maxlength, int array_length)
+{
+    string[] result = new string[array_length];
+    
+    for(int i = 0; i < array_length; i++)
+    {
+        result[i] = "";
+        Generate0(result, Maxlength, i);
+    }
+
+    return result;
+}
+
+static void Generate0(string []imput, int Maxlength, int index)
+{
+    if (imput[index].Length != Maxlength)
+    {
+        imput[index] += "0";
+        Generate1(imput, Maxlength, index);
+    }
+}
+
+static void Generate1(string []imput, int Maxlength, int index)
+{
+    if (imput[index].Length != Maxlength)
+    {
+        imput[index] += "1";
+        Generate0(imput, Maxlength, index);
+    }
+}
 }
