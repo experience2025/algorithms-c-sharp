@@ -17,7 +17,6 @@ public class Program
         LengthPathObject result = new LengthPathObject();
         result = CalculatePath(matrix);
 
-        string pathString = "";
         Console.WriteLine("Длина пути: {0}", result.Length);
         
         foreach (var indexes in result.Path)
