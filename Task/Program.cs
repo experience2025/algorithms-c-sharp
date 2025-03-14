@@ -15,6 +15,11 @@ public static int binomial_coefficient(int n, int k, bool rec = false)
    {
 	throw new InvalidOperationException("n < k");
    }
+
+   if(n < 0 || k < 0)
+   {
+	throw new InvalidOperationException("n or k less than 0");
+   }
    if(rec == false)
 		  {
 		      
