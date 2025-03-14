@@ -69,4 +69,16 @@ public class Test
        }
         
     }
+
+     [Fact]
+    public void TestBinomialCoefficientLarge()
+    {
+       bool[] variants = new bool[] {true,false};
+
+       foreach(bool variant in variants)
+       {
+         Assert.Equal(30045015, Program.BinomialCoefficient(30,20,variant));
+       }
+        
+    }
 }
