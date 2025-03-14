@@ -5,7 +5,7 @@ namespace Tests;
 public class Test
 {
     [Fact]
-    public void test_incorrect_length_values()
+    public void TestIncorrectLengthValues()
     {
         Assert.Throws<InvalidOperationException>(() => Program.Generate_strings(-1,10));
         Assert.Throws<InvalidOperationException>(() => Program.Generate_strings(10,-1));
@@ -51,7 +51,7 @@ public class Test
             {
                 foreach(bool variant in variants)
                 {
-                    int res = Program.BinomialCoefficient(i+1,j+1,variant);
+                    int res = Program.BinomialCoefficient(i,j+1,variant);
                     Assert.Equal(res, pascals_triangle[i][j]);
                 }
             }
