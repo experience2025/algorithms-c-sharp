@@ -43,6 +43,7 @@ public class Test
     public void TestBinomialCoefficientTiny()
     {
         int [][] pascals_triangle = new int [][] {new int[]{1}, new int[]{1, 1}, new int[]{1, 2, 1}, new int[]{1, 3, 3, 1}, new int[]{1, 4, 6, 4, 1}};
+        bool[] variants = new bool[] {True,False};
     }
 
     [Fact]
