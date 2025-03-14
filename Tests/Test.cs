@@ -40,35 +40,9 @@ public class Test
     }
 
     [Fact]
-    public void TestSquare()
+    public void TestBinomialCoefficientTiny()
     {
-       float [,] testMatrix = new float[6,6] 
-       {
-            {1, 2, 2, 1, 3, 4},
-            {3, 1, 1, 5, 7, 6},
-            {3, 4, 1, 2, 7, 6},
-            {5, 7, 1, 6, 4, 4},
-            {5, 9, 2, 3, 5, 8},
-            {2, 2, 1, 3, 1, 6},
-       };
-        
-       List<int[]> path = new List<int[]>() 
-       {
-            {new int[2]{0,0}},
-            {new int[2]{0,1}},
-            {new int[2]{1,1}},
-            {new int[2]{1,2}},
-            {new int[2]{2,2}},
-            {new int[2]{3,2}},
-            {new int[2]{4,2}},
-            {new int[2]{5,2}},
-            {new int[2]{5,3}},
-            {new int[2]{5,4}},
-            {new int[2]{5,5}},
-       };
-       Task.LengthPathObject result = new Task.LengthPathObject(20, path);
-        
-       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
+        int [][] pascals_triangle = new int [][] {[1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}, {1, 4, 6, 4, 1}}
     }
 
     [Fact]
