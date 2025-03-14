@@ -20,6 +20,7 @@ public static int BinomialCoefficient(int n, int k, bool rec = false)
    {
 	throw new InvalidOperationException("n or k less than 0");
    }
+	
    if(rec == false)
 		  {
 		      
@@ -65,15 +66,14 @@ public static int BinomialCoefficient(int n, int k, bool rec = false)
 		  
 	}
 
-public static string[] Generate_strings(int Maxlength, int array_length)
+public static string[] Generate_strings(int Maxlength)
 {
 
     if(Maxlength <= 0) throw new InvalidOperationException("Length <= 0");
-    if(array_length <= 0) throw new InvalidOperationException("Array length <= 0");
 	
-    string[] result = new string[array_length];
+    string[] result = new string[Maxlength];
     
-    for(int i = 0; i < array_length; i++)
+    for(int i = 0; i < Maxlength; i++)
     {
         result[i] = "";
         Generate0(result, Maxlength, i);
