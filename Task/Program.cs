@@ -8,7 +8,7 @@ public class Program
         result = binomial_coefficient(10,5,true);
     }
 
-public static int binomial_coefficient(int n, int k, bool rec = false)
+public static int BinomialCoefficient(int n, int k, bool rec = false)
 {
 
    if(n < k)
@@ -60,7 +60,7 @@ public static int binomial_coefficient(int n, int k, bool rec = false)
 			   return 1;
 		     }
 			
-			 return binomial_coefficient(n-1,k-1, true) + binomial_coefficient(n-1,k, true);
+			 return BinomialCoefficient(n-1,k-1, true) + BinomialCoefficient(n-1,k, true);
 		  }
 		  
 	}
