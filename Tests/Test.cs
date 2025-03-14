@@ -22,36 +22,21 @@ public class Test
     }
     
     [Fact]
-    public void TestNegative()
+    public void TestNLessThanK()
     {
-       float [,] testMatrix = new float[2,2] {{1.1f,2}, {-3,4}};
-
-       List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{1,0}}, {new int[2]{1,1}}};
-       Task.LengthPathObject result = new Task.LengthPathObject(2.1f, path);
-        
-       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
+        Assert.Throws<InvalidOperationException>(() => Program.BinomialCoefficient(1,5));
     }
 
     [Fact]
-    public void TestTriple()
+    public void TestNegativeN()
     {
-       float [,] testMatrix = new float[3,3] {{1,2,2}, {3,4,2}, {1,1,2}};
-
-       List<int[]> path = new List<int[]>() { {new int[2]{0,0}}, {new int[2]{1,0}}, {new int[2]{2,0}}, {new int[2]{2,1}}, {new int[2]{2,2}} };
-       Task.LengthPathObject result = new Task.LengthPathObject(8, path);
-        
-       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
+        Assert.Throws<InvalidOperationException>(() => Program.BinomialCoefficient(-1,5));
     }
 
     [Fact]
-    public void TestRectangle()
+    public void TestNegativeK()
     {
-       float [,] testMatrix = new float[2,3] {{1,2,2}, {3,4,1}};
-
-       List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{0,1}}, {new int[2]{0,2}}, {new int[2]{1,2}}};
-       Task.LengthPathObject result = new Task.LengthPathObject(6, path);
-        
-       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
+        Assert.Throws<InvalidOperationException>(() => Program.BinomialCoefficient(5,-1));
     }
 
     [Fact]
