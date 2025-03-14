@@ -51,7 +51,7 @@ public class Test
             {
                 foreach(bool variant in variants)
                 {
-                    int res = Program.BinomialCoefficient(i,j+1,variant);
+                    int res = Program.BinomialCoefficient(i,j,variant);
                     Assert.Equal(res, pascals_triangle[i][j]);
                 }
             }
