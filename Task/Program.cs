@@ -67,6 +67,8 @@ public static int binomial_coefficient(int n, int k, bool rec = false)
 
 static string[] Generate_strings(int Maxlength, int array_length)
 {
+
+    if(Maxlength <= 0) throw new InvalidOperationException("Length <= 0")
     string[] result = new string[array_length];
     
     for(int i = 0; i < array_length; i++)
