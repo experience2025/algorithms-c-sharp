@@ -10,6 +10,11 @@ public class Program
 
 public static int binomial_coefficient(int n, int k, bool rec = false)
 {
+
+   if(n < k)
+   {
+	throw new InvalidOperationException("n < k");
+   }
    if(rec == false)
 		  {
 		      
