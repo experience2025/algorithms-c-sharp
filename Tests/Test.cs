@@ -16,7 +16,7 @@ public class Test
     {
       for(int i = 1; i <= 20; i++)
       {
-          Assert.Equal(Generate_strings(10, i).Length, i);
+          Assert.Equal(Program.Generate_strings(10, i).Length, i);
       }
 
     }
