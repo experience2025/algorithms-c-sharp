@@ -65,7 +65,7 @@ public class Test
 
        foreach(bool variant in variants)
        {
-         Assert.Equal(252, BinomialCoefficient(10,5,variant));
+         Assert.Equal(252, Program.BinomialCoefficient(10,5,variant));
        }
         
     }
