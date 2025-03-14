@@ -2,7 +2,7 @@ using Task;
 
 namespace Tests;
 
-public class FibonacciTest
+public class Test
 {
     [Fact]
     public void TestZero()
