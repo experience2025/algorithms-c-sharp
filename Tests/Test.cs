@@ -42,7 +42,7 @@ public class Test
     [Fact]
     public void TestBinomialCoefficientTiny()
     {
-        int [][] pascals_triangle = new int [][] {[1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}, {1, 4, 6, 4, 1}}
+        int [][] pascals_triangle = new int [][] {{1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}, {1, 4, 6, 4, 1}};
     }
 
     [Fact]
