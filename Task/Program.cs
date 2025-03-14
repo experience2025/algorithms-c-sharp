@@ -5,7 +5,15 @@ public class Program
     public static void Main(string[] args)
     {
         int result = BinomialCoefficient(10,5);
+	Console.WriteLine(result);
         result = BinomialCoefficient(10,5,true);
+	Console.WriteLine(result);
+
+	foreach(string s in Generate_strings(10))
+	{
+    	  Console.WriteLine(s);
+	}
+	    
     }
 
 public static int BinomialCoefficient(int n, int k, bool rec = false)
