@@ -7,8 +7,7 @@ public class Test
     [Fact]
     public void TestIncorrectLengthValues()
     {
-        Assert.Throws<InvalidOperationException>(() => Program.Generate_strings(-1,10));
-        Assert.Throws<InvalidOperationException>(() => Program.Generate_strings(10,-1));
+        Assert.Throws<InvalidOperationException>(() => Program.Generate_strings(-1));
     }
 
     [Fact]
@@ -16,7 +15,7 @@ public class Test
     {
       for(int i = 1; i <= 20; i++)
       {
-          Assert.Equal(Program.Generate_strings(10, i).Length, i);
+          Assert.Equal(Program.Generate_strings(i).Length, i);
       }
 
     }
