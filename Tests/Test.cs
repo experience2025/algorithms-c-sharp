@@ -44,6 +44,18 @@ public class Test
     {
         int [][] pascals_triangle = new int [][] {new int[]{1}, new int[]{1, 1}, new int[]{1, 2, 1}, new int[]{1, 3, 3, 1}, new int[]{1, 4, 6, 4, 1}};
         bool[] variants = new bool[] {true,false};
+
+        for(int i = 0; i < pascals_triangle.Length; i++)
+        {
+            for(int j = 0; j < pascals_triangle[i].Length; j++)
+            {
+                foreach(bool variant in variants)
+                {
+                    int res = Program.BinomialCoefficients(i+1,j+1,variant);
+                    Assert.Equal(res, pascals_triangle[i][j]);
+                }
+            }
+        }
     }
 
     [Fact]
