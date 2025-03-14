@@ -5,29 +5,22 @@ namespace Tests;
 public class Test
 {
     [Fact]
-    public void TestSingle()
+    public void test_incorrect_length_values()
     {
-       float [,] testMatrix = new float[1,1];
-       testMatrix[0,0] = 1;
-
-       int[] indexes = new int[2] {0,0};
-       List<int[]> path = new List<int[]>() {indexes};
-       Task.LengthPathObject result = new Task.LengthPathObject(1, path);
-        
-       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
+        Assert.Throws<InvalidOperationException>(() => Program.Generate_strings(-1,10));
+        Assert.Throws<InvalidOperationException>(() => Program.Generate_strings(10,-1));
     }
 
     [Fact]
-    public void TestDouble()
+    public void TestZeroOne()
     {
-       float [,] testMatrix = new float[2,2] {{1.1f,2}, {3,4}};
-
-       List<int[]> path = new List<int[]>() {{new int[2]{0,0}}, {new int[2]{0,1}}, {new int[2]{1,1}}};
-       Task.LengthPathObject result = new Task.LengthPathObject(7.1f, path);
-        
-       Assert.Equivalent(result, Program.CalculatePath(testMatrix));
+      for(int i = 1; i <= 20; i++)
+      {
+          Assert.Equal(Generate_strings(10, i).Length, i);
+      }
 
     }
+    
     [Fact]
     public void TestNegative()
     {
