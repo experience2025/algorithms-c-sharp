@@ -5,7 +5,7 @@ public class Program
     public static void Main(string[] args)
     {
         int result = BinomialCoefficient(10,5);
-        result = binomial_coefficient(10,5,true);
+        result = BinomialCoefficient(10,5,true);
     }
 
 public static int BinomialCoefficient(int n, int k, bool rec = false)
