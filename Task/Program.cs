@@ -4,157 +4,53 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        float[,] matrix = new float[6, 6] 
-        {
-            { 1, 2, 2, 1, 3, 4 },
-            { 3, 1, 1, 5, 7, 6 },
-            { 3, 4, 1, 2, 7, 6 },
-            { 5, 7, 1, 6, 4, 4 },
-            { 5, 9, 2, 3, 5, 8 },
-            { 2, 2, 1, 3, 1, 6 },
-        };
-
-        LengthPathObject result = new LengthPathObject();
-        result = CalculatePath(matrix);
-
-        string pathString = "";
-        Console.WriteLine("Длина пути: {0}", result.Length);
-        
-        foreach (var indexes in result.Path)
-        {
-          Console.WriteLine($"{indexes[0]}, {indexes[1]}");
-        }
+        int result = binomial_coefficient(10,5);
+        result = binomial_coefficient(10,5,true);
     }
 
-public static LengthPathObject CalculatePath(float[,] matrix)
+public static int binomial_coefficient(int n, int k, bool rec = false)
 {
-    List<int[]> path = new List<int[]>();
-    float[,] coeffMatrix = (float[,])matrix.Clone();
-    LengthPathObject result = new LengthPathObject();
-
-    float cumulative = 0f;
-
-    for (int i = 0; i < matrix.GetLength(0); i++)
-    {
-        coeffMatrix[i, 0] = matrix[i, 0] + cumulative;
-        int[] indexes = new int[2] {i, 0};
-        path.Add(indexes);
-        cumulative = matrix[i, 0] + cumulative;
-    }
-
-    if (matrix.GetLength(1) == 1)
-    {
-        float pathLength1 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
-        result.Path = path;
-        result.Length = pathLength1;
-        return result;
-    }
-    else
-    {
-        path = new List<int[]>();
-    }
-
-    cumulative = 0;
-
-    for (int i = 0; i < matrix.GetLength(1); i++)
-    {
-        coeffMatrix[0, i] = matrix[0, i] + cumulative;
-        int[] indexes = new int[2] {0, i};
-        path.Add(indexes);
-        cumulative = matrix[0, i] + cumulative;
-    }
-
-    if (matrix.GetLength(0) == 1)
-    {
-        float pathLength2 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
-        result.Path = path;
-        result.Length = pathLength2;
-        return result;
-    }
-    else
-    {
-        path = new List<int[]>();
-    }
-
-    for (int i = 1; i < coeffMatrix.GetLength(0); i++)
-    {
-        for (int j = 1; j < coeffMatrix.GetLength(1); j++)
-        {
-            bool comparisonResult = coeffMatrix[i - 1, j] < coeffMatrix[i, j - 1];
-
-            if (comparisonResult)
-            {
-                coeffMatrix[i, j] = coeffMatrix[i - 1, j] + coeffMatrix[i, j];
-            }
-            else
-            {
-                coeffMatrix[i, j] = coeffMatrix[i, j - 1] + coeffMatrix[i, j];
-            }
-        }
-    }
-
-    int rowPosition = coeffMatrix.GetLength(0) - 1;
-    int columnPosition = coeffMatrix.GetLength(1) - 1;
-
-    while(rowPosition>=0 && columnPosition>=0)
-    {
-        if(rowPosition == 0)
-        {
-            int[] indexes = new int[2] {rowPosition, columnPosition};
-            path.Add (indexes);
-            columnPosition--;
-            continue;
-        }
-
-        if (columnPosition == 0)
-        {
-            int[] indexes = new int[2] {rowPosition, columnPosition};
-            path.Add (indexes);
-            rowPosition--;
-            continue;
-        }
-
-        if (coeffMatrix[rowPosition,columnPosition - 1] < coeffMatrix[rowPosition - 1, columnPosition])
-        {
-            int[] indexes = new int[2] {rowPosition, columnPosition};
-            path.Add (indexes);
-            columnPosition--;
-        }
-        else
-        {
-            int[] indexes = new int[2] {rowPosition, columnPosition};
-            path.Add (indexes);
-            rowPosition--;
-        }
-    }
-
-    float pathLength = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
-    path.Reverse();
-    result.Length = pathLength;
-    result.Path = path;
-
-    return result;
-
-}
-
-}
-
-public class LengthPathObject
-{
-    public float Length;
-    public List<int[]> Path;
-
-    public LengthPathObject(float length, List<int[]> path)
-    {
-      Length = length;
-      Path = path;
-    }
-
-    public LengthPathObject()
-    {
-      Length = 0;
-      Path = new List<int[]>();
-    }
-
-    
-}
+   if(rec == false)
+		  {
+		      
+		    List<int> PascalTriangleLine = new List<int>();
+		    List<int> NextLine = new List<int>();
+		    
+		    PascalTriangleLine.Add(1);
+		    PascalTriangleLine.Add(1);
+		    
+		    for(int i = 1; i < n; i++)
+		    {
+		        for(int j = 0; j < PascalTriangleLine.Count - 1; j++)
+		        {
+		            NextLine.Add(PascalTriangleLine[j] + PascalTriangleLine[j+1]);
+		        }
+		        
+		        PascalTriangleLine.Clear();
+		        
+		        foreach(int x in NextLine)
+		        {
+		            PascalTriangleLine.Add(x);
+		        }
+		        
+		        PascalTriangleLine.Insert(0,1);
+		        PascalTriangleLine.Add(1);
+		        
+		        NextLine.Clear();
+		        
+		    }
+			
+			return PascalTriangleLine[k];
+			
+		  }
+		  else
+		  {
+		     if(n==0 || k==0 || n==k)
+			 {
+			   return 1;
+		     }
+			
+			 return binomial_coefficient(n-1,k-1, true) + binomial_coefficient(n-1,k, true);
+		  }
+		  
+	}
