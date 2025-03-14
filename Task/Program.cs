@@ -65,7 +65,7 @@ public static int binomial_coefficient(int n, int k, bool rec = false)
 		  
 	}
 
-static string[] Generate_strings(int Maxlength, int array_length)
+public static string[] Generate_strings(int Maxlength, int array_length)
 {
 
     if(Maxlength <= 0) throw new InvalidOperationException("Length <= 0");
@@ -82,7 +82,7 @@ static string[] Generate_strings(int Maxlength, int array_length)
     return result;
 }
 
-static void Generate0(string []imput, int Maxlength, int index)
+public static void Generate0(string []imput, int Maxlength, int index)
 {
     if (imput[index].Length != Maxlength)
     {
@@ -91,7 +91,7 @@ static void Generate0(string []imput, int Maxlength, int index)
     }
 }
 
-static void Generate1(string []imput, int Maxlength, int index)
+public static void Generate1(string []imput, int Maxlength, int index)
 {
     if (imput[index].Length != Maxlength)
     {
