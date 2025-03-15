@@ -47,45 +47,27 @@ public class Test
     }
 
     [Fact]
-    public void TestBinomialCoefficientTiny()
+    public void TestTripleNum()
     {
-        int [][] pascals_triangle = new int [][] {new int[]{1}, new int[]{1, 1}, new int[]{1, 2, 1}, new int[]{1, 3, 3, 1}, new int[]{1, 4, 6, 4, 1}};
-        bool[] variants = new bool[] {true,false};
-
-        for(int i = 0; i < pascals_triangle.Length; i++)
-        {
-            for(int j = 0; j < pascals_triangle[i].Length; j++)
-            {
-                foreach(bool variant in variants)
-                {
-                    int res = Program.BinomialCoefficient(i,j,variant);
-                    Assert.Equal(res, pascals_triangle[i][j]);
-                }
-            }
-        }
+        Assert.Equivalent(new int[] {1,2,3}, Program.GeneratePermutations(new int[] {3,2,1})[0]);
+        Assert.Equivalent(new int[] {1,3,2}, Program.GeneratePermutations(new int[] {3,2,1})[1]);
+        Assert.Equivalent(new int[] {2,1,3}, Program.GeneratePermutations(new int[] {3,2,1})[2]);
+        Assert.Equivalent(new int[] {2,3,1}, Program.GeneratePermutations(new int[] {3,2,1})[3]);
+        Assert.Equivalent(new int[] {3,1,2}, Program.GeneratePermutations(new int[] {3,2,1})[4]);
+        Assert.Equivalent(new int[] {3,2,1}, Program.GeneratePermutations(new int[] {3,2,1})[5]);
     }
 
     [Fact]
-    public void TestBinomialCoefficientMiddle()
+    public void TestTripleChar()
     {
-       bool[] variants = new bool[] {true,false};
-
-       foreach(bool variant in variants)
-       {
-         Assert.Equal(252, Program.BinomialCoefficient(10,5,variant));
-       }
-        
+        Assert.Equivalent(new string[] {"a","b","c"}, Program.GeneratePermutations(new string[] {"a","b","c"})[0]);
+        Assert.Equivalent(new string[] {"a","c","b"}, Program.GeneratePermutations(new string[] {"a","b","c"})[0]);
+        Assert.Equivalent(new string[] {"b","a","c"}, Program.GeneratePermutations(new string[] {"a","b","c"})[0]);
+        Assert.Equivalent(new string[] {"b","c","a"}, Program.GeneratePermutations(new string[] {"a","b","c"})[0]);
+        Assert.Equivalent(new string[] {"c","a","b"}, Program.GeneratePermutations(new string[] {"a","b","c"})[0]);
+        Assert.Equivalent(new string[] {"c","b","a"}, Program.GeneratePermutations(new string[] {"a","b","c"})[0]);
     }
 
-     [Fact]
-    public void TestBinomialCoefficientLarge()
-    {
-       bool[] variants = new bool[] {true,false};
 
-       foreach(bool variant in variants)
-       {
-         Assert.Equal(30045015, Program.BinomialCoefficient(30,20,variant));
-       }
-        
-    }
+
 }
