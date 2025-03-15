@@ -28,56 +28,53 @@ public class Program
 public static LengthPathObject CalculatePath(float[,] matrix)
 {
     List<int[]> path = new List<int[]>();
-    float[,] coeffMatrix = (float[,])matrix.Clone();
     LengthPathObject result = new LengthPathObject();
 
-    float cumulative = 0f;
+    float[,] coeffMatrix = new float[matrix.GetLength(0)+2, matrix.GetLength(1)+2];
 
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
-        coeffMatrix[i, 0] = matrix[i, 0] + cumulative;
-        int[] indexes = new int[2] {i, 0};
-        path.Add(indexes);
-        cumulative = matrix[i, 0] + cumulative;
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            coeffMatrix[i+1, j+1] = matrix[i, j];
+        }
     }
 
-    if (matrix.GetLength(1) == 1)
+    for (int i = 0; i < coeffMatrix.GetLength(0); i+= coeffMatrix.GetLength(0)-1)
     {
-        float pathLength1 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
-        result.Path = path;
-        result.Length = pathLength1;
-        return result;
-    }
-    else
-    {
-        path = new List<int[]>();
+        for (int j = 0; j < coeffMatrix.GetLength(1); j++)
+        {
+            coeffMatrix[i, j] = float.PositiveInfinity;
+        }
     }
 
-    cumulative = 0;
-
-    for (int i = 0; i < matrix.GetLength(1); i++)
+    for (int i = 0; i < coeffMatrix.GetLength(1); i += coeffMatrix.GetLength(1) - 1)
     {
-        coeffMatrix[0, i] = matrix[0, i] + cumulative;
-        int[] indexes = new int[2] {0, i};
-        path.Add(indexes);
-        cumulative = matrix[0, i] + cumulative;
+        for (int j = 0; j < coeffMatrix.GetLength(0); j++)
+        {
+            coeffMatrix[j, i] = float.PositiveInfinity;
+        }
     }
 
-    if (matrix.GetLength(0) == 1)
+    float cumulative = 0f;
+    
+    for (int i = 1; i < coeffMatrix.GetLength(0) - 1; i++)
     {
-        float pathLength2 = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
-        result.Path = path;
-        result.Length = pathLength2;
-        return result;
-    }
-    else
-    {
-        path = new List<int[]>();
+        coeffMatrix[i, 1] = coeffMatrix[i, 1] + cumulative;
+        cumulative = coeffMatrix[i, 1];
     }
 
-    for (int i = 1; i < coeffMatrix.GetLength(0); i++)
+    cumulative = 0f;
+
+    for (int i = 1; i < coeffMatrix.GetLength(1) - 1; i++)
     {
-        for (int j = 1; j < coeffMatrix.GetLength(1); j++)
+        coeffMatrix[1, i] = coeffMatrix[1, i] + cumulative;
+        cumulative = coeffMatrix[1, i];
+    }
+
+    for (int i = 2; i < coeffMatrix.GetLength(0) - 1; i++)
+    {
+        for (int j = 2; j < coeffMatrix.GetLength(1) - 1; j++)
         {
             bool comparisonResult = coeffMatrix[i - 1, j] < coeffMatrix[i, j - 1];
 
@@ -92,42 +89,26 @@ public static LengthPathObject CalculatePath(float[,] matrix)
         }
     }
 
-    int rowPosition = coeffMatrix.GetLength(0) - 1;
-    int columnPosition = coeffMatrix.GetLength(1) - 1;
+    int rowPosition = coeffMatrix.GetLength(0) - 2;
+    int columnPosition = coeffMatrix.GetLength(1) - 2;
 
-    while(rowPosition>=0 && columnPosition>=0)
+    while (rowPosition >= 1 && columnPosition >= 1)
     {
-        if(rowPosition == 0)
+        if (coeffMatrix[rowPosition, columnPosition - 1] < coeffMatrix[rowPosition - 1, columnPosition])
         {
-            int[] indexes = new int[2] {rowPosition, columnPosition};
-            path.Add (indexes);
-            columnPosition--;
-            continue;
-        }
-
-        if (columnPosition == 0)
-        {
-            int[] indexes = new int[2] {rowPosition, columnPosition};
-            path.Add (indexes);
-            rowPosition--;
-            continue;
-        }
-
-        if (coeffMatrix[rowPosition,columnPosition - 1] < coeffMatrix[rowPosition - 1, columnPosition])
-        {
-            int[] indexes = new int[2] {rowPosition, columnPosition};
-            path.Add (indexes);
+            int[] indexes = { rowPosition, columnPosition };
+            path.Add(indexes);
             columnPosition--;
         }
         else
         {
-            int[] indexes = new int[2] {rowPosition, columnPosition};
-            path.Add (indexes);
+            int[] indexes = { rowPosition, columnPosition };
+            path.Add(indexes);
             rowPosition--;
         }
     }
 
-    float pathLength = coeffMatrix[coeffMatrix.GetLength(0) - 1, coeffMatrix.GetLength(1) - 1];
+    float pathLength = coeffMatrix[coeffMatrix.GetLength(0) - 2, coeffMatrix.GetLength(1) - 2];
     path.Reverse();
     result.Length = pathLength;
     result.Path = path;
@@ -135,7 +116,6 @@ public static LengthPathObject CalculatePath(float[,] matrix)
     return result;
 
 }
-
 }
 
 public class LengthPathObject
