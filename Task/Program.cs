@@ -39,7 +39,7 @@ static List<string[]> GeneratePermutations<T>(T[] objects)
 
  if (objects.Length == 0)
  {
-     throw new ArgumentException("Массив пустой");
+     return result;
  }
 
  if (objects.Distinct().Count() != objects.Length)
