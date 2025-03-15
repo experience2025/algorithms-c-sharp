@@ -39,6 +39,7 @@ static List<string[]> GeneratePermutations<T>(T[] objects)
 
  if (objects.Length == 0)
  {
+     result.Add([""]);
      return result;
  }
 
