@@ -16,7 +16,7 @@ public class Program
      }
   }
 
-static List<string[]> GeneratePermutations<T>(T[] objects) 
+public static List<string[]> GeneratePermutations<T>(T[] objects) 
 {
    string[] sortedObjects = new string[objects.Length];
    List<string[]> result = new List<string[]>();
