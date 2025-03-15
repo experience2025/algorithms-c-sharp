@@ -5,37 +5,45 @@ namespace Tests;
 public class Test
 {
     [Fact]
-    public void TestIncorrectLengthValues()
+    public void TestIncorrectInputs()
     {
-        Assert.Throws<InvalidOperationException>(() => Program.Generate_strings(-1));
+        object[][] incorrect_inputs = {new object[] {null}, new object[] {1.1}};
+        foreach(object[] obj in incorrect_inputs)
+        {
+            Assert.Throws<Exception>(() => Program.GeneratePermutations(obj));
+        }
     }
 
     [Fact]
-    public void TestZeroOne()
+    public void TestDuplicates()
     {
-      for(int i = 1; i <= 20; i++)
-      {
-          Assert.Equal(Program.Generate_strings(i).Length, i);
-      }
-
+       Assert.Throws<Exception>(() => Program.GeneratePermutations(new string[] {"a","a","ab"}));
     }
     
     [Fact]
-    public void TestNLessThanK()
+    public void TestEmpty()
     {
-        Assert.Throws<InvalidOperationException>(() => Program.BinomialCoefficient(1,5));
+        Assert.Equal("", Program.GeneratePermutations(new object[] {})[0][0]);
     }
 
     [Fact]
-    public void TestNegativeN()
+    public void TestSingleNum()
     {
-        Assert.Throws<InvalidOperationException>(() => Program.BinomialCoefficient(-1,5));
+        Assert.Equal("1", Program.GeneratePermutations(new int[] {1})[0][0]);
     }
 
     [Fact]
-    public void TestNegativeK()
+    public void TestDoubleNum()
     {
-        Assert.Throws<InvalidOperationException>(() => Program.BinomialCoefficient(5,-1));
+        Assert.Equivalent([{"1","2"}], Program.GeneratePermutations(new int[] {1,2})[0]));
+        Assert.Equivalent([{"2","1"}], Program.GeneratePermutations(new int[] {1,2})[1]));
+    }
+
+    [Fact]
+    public void TestDoubleBool()
+    {
+        Assert.Equivalent([{true,false}], Program.GeneratePermutations(new bool[] {true,false})[0]));
+        Assert.Equivalent([{false,true}], Program.GeneratePermutations(new bool[] {true,false})[1]));
     }
 
     [Fact]
