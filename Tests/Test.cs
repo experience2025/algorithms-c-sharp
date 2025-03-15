@@ -17,7 +17,7 @@ public class Test
     [Fact]
     public void TestDuplicates()
     {
-       Assert.Throws<Exception>(() => Program.GeneratePermutations(new string[] {"a","a","ab"}));
+       Assert.Throws<ArgumentException>(() => Program.GeneratePermutations(new string[] {"a","a","ab"}));
     }
     
     [Fact]
