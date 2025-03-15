@@ -27,10 +27,10 @@ static List<string[]> GeneratePermutations<T>(T[] objects)
         return result;
     }
 
-    if (objects.Length == 0)
-    {
-        return result;
-    }
+   if (objects.Length == 0)
+  {
+    throw new ArgumentException("Массив пустой");
+  }
 
     if (objects[0].GetType() != typeof(String)
         && objects[0].GetType() != typeof(Int32)
