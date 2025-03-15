@@ -35,15 +35,15 @@ public class Test
     [Fact]
     public void TestDoubleNum()
     {
-        Assert.Equivalent([{"1","2"}], Program.GeneratePermutations(new int[] {1,2})[0]));
-        Assert.Equivalent([{"2","1"}], Program.GeneratePermutations(new int[] {1,2})[1]));
+        Assert.Equivalent([{"1","2"}], Program.GeneratePermutations(new int[] {1,2})[0]);
+        Assert.Equivalent([{"2","1"}], Program.GeneratePermutations(new int[] {1,2})[1]);
     }
 
     [Fact]
     public void TestDoubleBool()
     {
-        Assert.Equivalent([{true,false}], Program.GeneratePermutations(new bool[] {true,false})[0]));
-        Assert.Equivalent([{false,true}], Program.GeneratePermutations(new bool[] {true,false})[1]));
+        Assert.Equivalent([{true,false}], Program.GeneratePermutations(new bool[] {true,false})[0]);
+        Assert.Equivalent([{false,true}], Program.GeneratePermutations(new bool[] {true,false})[1]);
     }
 
     [Fact]
