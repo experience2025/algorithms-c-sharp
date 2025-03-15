@@ -2,6 +2,8 @@
 
 public class Program
 {
+  public static void Main(string[] args)
+  {
     string[] a = { "2" , "1", "3" };
 
     foreach (string[] permutation in GeneratePermutations(a))
@@ -10,10 +12,9 @@ public class Program
         {
       	  Console.Write(s + " ");
  	}
-     Console.WriteLine();
-    }
-	    
-}
+     Console.WriteLine();	    
+     }
+  }
 
 static List<string[]> GeneratePermutations<T>(T[] objects) 
 {
