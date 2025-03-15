@@ -21,15 +21,16 @@ public static List<string[]> GeneratePermutations<T>(T[] objects)
    string[] sortedObjects = new string[objects.Length];
    List<string[]> result = new List<string[]>();
 
-  for (int i = 0; i < objects.Length; i++)
-  {
-     if (objects[i].GetType() != typeof(String)
-     && objects[i].GetType() != typeof(Int32)
-     && objects[i].GetType() != typeof(Boolean))
-     {
-         throw new ArgumentException("Можно использовать только строки, логические переменные и целые числа");
-     }
-   }
+     for (int i = 0; i < objects.Length; i++)
+    {
+        if (objects[i] == null
+        ||  objects[i].GetType() != typeof(String)
+        && objects[i].GetType() != typeof(Int32)
+        && objects[i].GetType() != typeof(Boolean))
+        {
+            throw new ArgumentException("Можно использовать только строки, логические переменные и целые числа");
+        }
+    }
 
   if (objects.Length == 1)
   {
