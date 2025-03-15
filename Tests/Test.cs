@@ -10,7 +10,7 @@ public class Test
         object[][] incorrect_inputs = {new object[] {null}, new object[] {1.1}};
         foreach(object[] obj in incorrect_inputs)
         {
-            Assert.Throws<Exception>(() => Program.GeneratePermutations(obj));
+            Assert.Throws<ArgumentException>(() => Program.GeneratePermutations(obj));
         }
     }
 
