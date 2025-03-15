@@ -96,13 +96,13 @@ public static LengthPathObject CalculatePath(float[,] matrix)
     {
         if (coeffMatrix[rowPosition, columnPosition - 1] < coeffMatrix[rowPosition - 1, columnPosition])
         {
-            int[] indexes = { rowPosition, columnPosition };
+            int[] indexes = { rowPosition - 1, columnPosition - 1};
             path.Add(indexes);
             columnPosition--;
         }
         else
         {
-            int[] indexes = { rowPosition, columnPosition };
+            int[] indexes = { rowPosition - 1, columnPosition - 1};
             path.Add(indexes);
             rowPosition--;
         }
