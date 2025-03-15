@@ -2,109 +2,105 @@
 
 public class Program
 {
-    public static void Main(string[] args)
-    {
-        int result = BinomialCoefficient(10,5);
-	Console.WriteLine(result);
-        result = BinomialCoefficient(10,5,true);
-	Console.WriteLine(result);
+    string[] a = { "2" , "1", "3" };
 
-	foreach(string s in Generate_strings(10))
-	{
-    	  Console.WriteLine(s);
-	}
+    foreach (string[] permutation in GeneratePermutations(a))
+    {
+  	foreach(string s in permutation)
+        {
+      	  Console.Write(s + " ");
+ 	}
+     Console.WriteLine();
+    }
 	    
+}
+
+static List<string[]> GeneratePermutations<T>(T[] objects) 
+{
+    string[] sortedObjects = new string[objects.Length];
+    List<string[]> result = new List<string[]>();
+
+    if (objects.Length == 1)
+    {
+        result.Add([objects[0].ToString()]);
+        return result;
     }
 
-public static int BinomialCoefficient(int n, int k, bool rec = false)
-{
-
-   if(n < k)
-   {
-	throw new InvalidOperationException("n < k");
-   }
-
-   if(n < 0 || k < 0)
-   {
-	throw new InvalidOperationException("n or k less than 0");
-   }
-	
-   if(rec == false)
-		  {
-		      
-		    List<int> PascalTriangleLine = new List<int>();
-		    List<int> NextLine = new List<int>();
-		    
-		    PascalTriangleLine.Add(1);
-		    PascalTriangleLine.Add(1);
-		    
-		    for(int i = 1; i < n; i++)
-		    {
-		        for(int j = 0; j < PascalTriangleLine.Count - 1; j++)
-		        {
-		            NextLine.Add(PascalTriangleLine[j] + PascalTriangleLine[j+1]);
-		        }
-		        
-		        PascalTriangleLine.Clear();
-		        
-		        foreach(int x in NextLine)
-		        {
-		            PascalTriangleLine.Add(x);
-		        }
-		        
-		        PascalTriangleLine.Insert(0,1);
-		        PascalTriangleLine.Add(1);
-		        
-		        NextLine.Clear();
-		        
-		    }
-			
-			return PascalTriangleLine[k];
-			
-		  }
-		  else
-		  {
-		     if(n==0 || k==0 || n==k)
-			 {
-			   return 1;
-		     }
-			
-			 return BinomialCoefficient(n-1,k-1, true) + BinomialCoefficient(n-1,k, true);
-		  }
-		  
-	}
-
-public static string[] Generate_strings(int Maxlength)
-{
-
-    if(Maxlength <= 0) throw new InvalidOperationException("Length <= 0");
-	
-    string[] result = new string[Maxlength];
-    
-    for(int i = 0; i < Maxlength; i++)
+    if (objects.Length == 0)
     {
-        result[i] = "";
-        Generate0(result, Maxlength, i);
+        return result;
+    }
+
+    if (objects[0].GetType() != typeof(String)
+        && objects[0].GetType() != typeof(Int32)
+        && objects[0].GetType() != typeof(Boolean))
+    {
+        throw new ArgumentException("Можно использовать только строки, логические переменные и целые числа");
+    }
+
+    if (objects.Distinct().Count() != objects.Length)
+    {
+        throw new ArgumentException("В массиве есть дубликаты");
+    }
+
+    for (int i = 0; i < objects.Length; i++)
+    {
+        sortedObjects[i] = objects[i].ToString();
+    }
+
+    Array.Sort(sortedObjects);
+
+    string[] firstEntry = new string[sortedObjects.Length];
+    Array.Copy(sortedObjects, firstEntry, sortedObjects.Length);
+    result.Add(firstEntry);
+
+    bool stopFlag = false;
+
+    while(!stopFlag)
+    {
+        int j = 0;
+
+        for (int i = sortedObjects.Length - 1; i >= 1; i--)
+        {
+            if (sortedObjects[i-1].CompareTo(sortedObjects[i]) < 0)
+            {
+                j = i - 1;
+                break;
+            }
+
+            if (i == 1)
+            {
+                stopFlag = true;
+                break;
+            }
+        }
+
+        if (stopFlag == true)
+        {
+            break;
+        }
+
+        for (int i = sortedObjects.Length - 1; i > j; i--)
+        {
+            if (sortedObjects[i].CompareTo(sortedObjects[j]) > 0)
+            {
+                string s = sortedObjects[j];
+                sortedObjects[j] = sortedObjects[i];
+                sortedObjects[i] = s;
+
+                break;
+            }
+        }
+
+        Array.Reverse(sortedObjects, j + 1, sortedObjects.Length - j - 1);
+
+        string[] arrayToAdd = new string[sortedObjects.Length];
+        Array.Copy(sortedObjects,arrayToAdd, sortedObjects.Length);
+        
+        result.Add(arrayToAdd);
+
     }
 
     return result;
-}
-
-public static void Generate0(string []imput, int Maxlength, int index)
-{
-    if (imput[index].Length != Maxlength)
-    {
-        imput[index] += "0";
-        Generate1(imput, Maxlength, index);
-    }
-}
-
-public static void Generate1(string []imput, int Maxlength, int index)
-{
-    if (imput[index].Length != Maxlength)
-    {
-        imput[index] += "1";
-        Generate0(imput, Maxlength, index);
-    }
 }
 }
