@@ -18,36 +18,39 @@ public class Program
 
 static List<string[]> GeneratePermutations<T>(T[] objects) 
 {
-    string[] sortedObjects = new string[objects.Length];
-    List<string[]> result = new List<string[]>();
+   string[] sortedObjects = new string[objects.Length];
+   List<string[]> result = new List<string[]>();
 
-    if (objects.Length == 1)
-    {
-        result.Add([objects[0].ToString()]);
-        return result;
-    }
-
-   if (objects.Length == 0)
+  for (int i = 0; i < objects.Length; i++)
   {
-    throw new ArgumentException("Массив пустой");
+     if (objects[i].GetType() != typeof(String)
+     && objects[i].GetType() != typeof(Int32)
+     && objects[i].GetType() != typeof(Boolean))
+     {
+         throw new ArgumentException("Можно использовать только строки, логические переменные и целые числа");
+     }
+   }
+
+  if (objects.Length == 1)
+  {
+     result.Add([objects[0].ToString()]);
+     return result;
   }
 
-    if (objects[0].GetType() != typeof(String)
-        && objects[0].GetType() != typeof(Int32)
-        && objects[0].GetType() != typeof(Boolean))
-    {
-        throw new ArgumentException("Можно использовать только строки, логические переменные и целые числа");
-    }
+ if (objects.Length == 0)
+ {
+     throw new ArgumentException("Массив пустой");
+ }
 
-    if (objects.Distinct().Count() != objects.Length)
-    {
-        throw new ArgumentException("В массиве есть дубликаты");
-    }
+ if (objects.Distinct().Count() != objects.Length)
+ {
+     throw new ArgumentException("В массиве есть дубликаты");
+ }
 
-    for (int i = 0; i < objects.Length; i++)
-    {
-        sortedObjects[i] = objects[i].ToString();
-    }
+ for (int i = 0; i < objects.Length; i++)
+ {
+     sortedObjects[i] = objects[i].ToString();
+ }
 
     Array.Sort(sortedObjects);
 
