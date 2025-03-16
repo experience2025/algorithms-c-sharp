@@ -15,16 +15,20 @@ public static int Rabbits(int targetMonth, int rabbitLifetime)
     Queue<int> Fibonacci = new Queue<int>();
     Fibonacci.Enqueue(1);
     Fibonacci.Enqueue(1);
-
+    
     if(targetMonth == 1 || targetMonth == 2)
     {
         return 1;
     }
 
-    if (rabbitLifetime == 1)
+    if (rabbitLifetime < 2)
     {
-        if (targetMonth == 1) return 1;
-        else return 0;
+        throw new ArgumentException("Продолжительность жизни должна быть не меньше 2 месяцев");
+    }
+
+    if (targetMonth < 1)
+    {
+        throw new ArgumentException("Кол-во месяцев должно быть больше 0");
     }
 
     if (rabbitLifetime == 2)
