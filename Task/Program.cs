@@ -4,107 +4,74 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        int result = BinomialCoefficient(10,5);
-	Console.WriteLine(result);
-        result = BinomialCoefficient(10,5,true);
-	Console.WriteLine(result);
-
-	foreach(string s in Generate_strings(10))
-	{
-    	  Console.WriteLine(s);
-	}
-	    
+   	Console.WriteLine(Rabbits(8,7));    
     }
 
-public static int BinomialCoefficient(int n, int k, bool rec = false)
+public static int Rabbits(int targetMonth, int rabbitLifetime)
 {
+    int result = 0;
+    int index = 3;
 
-   if(n < k)
-   {
-	throw new InvalidOperationException("n < k");
-   }
+    Queue<int> Fibonacci = new Queue<int>();
+    Fibonacci.Enqueue(1);
+    Fibonacci.Enqueue(1);
 
-   if(n < 0 || k < 0)
-   {
-	throw new InvalidOperationException("n or k less than 0");
-   }
-	
-   if(rec == false)
-		  {
-		      
-		    List<int> PascalTriangleLine = new List<int>();
-		    List<int> NextLine = new List<int>();
-		    
-		    PascalTriangleLine.Add(1);
-		    PascalTriangleLine.Add(1);
-		    
-		    for(int i = 1; i < n; i++)
-		    {
-		        for(int j = 0; j < PascalTriangleLine.Count - 1; j++)
-		        {
-		            NextLine.Add(PascalTriangleLine[j] + PascalTriangleLine[j+1]);
-		        }
-		        
-		        PascalTriangleLine.Clear();
-		        
-		        foreach(int x in NextLine)
-		        {
-		            PascalTriangleLine.Add(x);
-		        }
-		        
-		        PascalTriangleLine.Insert(0,1);
-		        PascalTriangleLine.Add(1);
-		        
-		        NextLine.Clear();
-		        
-		    }
-			
-			return PascalTriangleLine[k];
-			
-		  }
-		  else
-		  {
-		     if(n==0 || k==0 || n==k)
-			 {
-			   return 1;
-		     }
-			
-			 return BinomialCoefficient(n-1,k-1, true) + BinomialCoefficient(n-1,k, true);
-		  }
-		  
-	}
-
-public static string[] Generate_strings(int Maxlength)
-{
-
-    if(Maxlength <= 0) throw new InvalidOperationException("Length <= 0");
-	
-    string[] result = new string[Maxlength];
-    
-    for(int i = 0; i < Maxlength; i++)
+    if(targetMonth == 1 || targetMonth == 2)
     {
-        result[i] = "";
-        Generate0(result, Maxlength, i);
+        return 1;
     }
 
+    if (rabbitLifetime == 1)
+    {
+        if (targetMonth == 1) return 1;
+        else return 0;
+    }
+
+    if (rabbitLifetime == 2)
+    {
+        return 1;
+    }
+
+    while (index < targetMonth && index < rabbitLifetime)
+    {       
+        result = Fibonacci.ElementAt(Fibonacci.Count - 1) + Fibonacci.ElementAt(Fibonacci.Count - 2);
+        Fibonacci.Enqueue(result);
+        index++;
+    }
+
+    if (index == targetMonth)
+    {
+        result = Fibonacci.ElementAt(Fibonacci.Count - 1) + Fibonacci.ElementAt(Fibonacci.Count - 2);
+        return result;
+    }
+
+    result = Fibonacci.ElementAt(Fibonacci.Count - 1) - 1 + Fibonacci.ElementAt(Fibonacci.Count - 2);
+    Fibonacci.Enqueue(result);
+    index++;
+
+    if (index == targetMonth)
+    {
+        result = Fibonacci.ElementAt(Fibonacci.Count - 1) + Fibonacci.ElementAt(Fibonacci.Count - 2);
+        return result;
+    }
+
+    result = Fibonacci.ElementAt(Fibonacci.Count - 1) + Fibonacci.ElementAt(Fibonacci.Count - 2);
+    Fibonacci.Enqueue(result);
+    index++;
+
+    if (index == targetMonth)
+    {
+        result = Fibonacci.ElementAt(Fibonacci.Count - 1) + Fibonacci.ElementAt(Fibonacci.Count - 2);
+        return result;
+    }
+
+    for (int i = index + 1; i <= targetMonth; i++)
+    {
+        result = Fibonacci.ElementAt(Fibonacci.Count - 1) - Fibonacci.Dequeue() + Fibonacci.ElementAt(Fibonacci.Count - 2);
+        Fibonacci.Enqueue(result);
+    }
+
+    result = Fibonacci.ElementAt(Fibonacci.Count - 1) + Fibonacci.ElementAt(Fibonacci.Count - 2);
     return result;
-}
-
-public static void Generate0(string []imput, int Maxlength, int index)
-{
-    if (imput[index].Length != Maxlength)
-    {
-        imput[index] += "0";
-        Generate1(imput, Maxlength, index);
-    }
-}
-
-public static void Generate1(string []imput, int Maxlength, int index)
-{
-    if (imput[index].Length != Maxlength)
-    {
-        imput[index] += "1";
-        Generate0(imput, Maxlength, index);
-    }
 }
 }
