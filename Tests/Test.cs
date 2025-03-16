@@ -17,6 +17,8 @@ public class Test
         Assert.Equal(13,Program.Rabbits(7,9));
         Assert.Equal(20,Program.Rabbits(8,7));
         Assert.Equal(34,Program.Rabbits(9,9));
+        //35,5,504355
+        //50,5,155898016
     }
 
 }
